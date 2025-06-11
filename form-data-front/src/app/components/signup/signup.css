@@ -1,0 +1,159 @@
+/* Import a clean, modern font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Host Styling
+   - Adds a subtle gradient to the background for visual depth.
+   - Centers the form container on the page.
+*/
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Poppins', sans-serif;
+  padding: 1rem;
+}
+
+/* Signup Container - The "Card"
+   - Frosted glass effect with 'backdrop-filter'.
+   - A softer, more layered box-shadow to make it "lift" off the page.
+   - Border adds a crisp edge to the card.
+*/
+.signup-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+/* Form Header */
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 2.25rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Field Labels */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Input Focus State */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #ffafaf;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  height: 1em; /* Prevents layout jump */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Highlighting invalid fields for better UX */
+.ng-invalid.ng-touched {
+    border-color: #ff7b7b;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+  color: #1a2940;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(102, 166, 255, 0.4);
+}
+
+/* Button Hover State */
+button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 166, 255, 0.6);
+}
+
+/* Button Disabled State */
+button[type="submit"]:disabled {
+  background: rgba(255, 255, 255, 0.2);
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.5);
+  box-shadow: none;
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.login-link a {
+  color: #b3c5ff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .signup-container {
+    padding: 2rem;
+  }
+}
