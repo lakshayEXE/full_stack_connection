@@ -8,7 +8,8 @@ export const routes: Routes = [
   { path: 'signup', component: Signup },
   { path: 'login', canActivate:[LoginRedirect],component: Login },
   { path: 'dashboard', canActivate:[AuthGuard] ,component: DashboardComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' } // Default route
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route
+  { path: '**' , redirectTo :'/login'}
 ];
 
 /// jab agr humara token store hai toh vo login page p dubara nahi jana chahiye

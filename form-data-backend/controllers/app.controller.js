@@ -51,9 +51,6 @@ exports.register = [
   },
 ];
 
-
-
-
 exports.login = [
   // 1. Validation middleware
   
@@ -106,7 +103,7 @@ exports.dashboard = (req, res) => {
 const userId = req.user.id;
 
 const query = `
-  SELECT users.id, users.email, user_details.address,
+  SELECT users.name , users.id, users.email, user_details.address,
          user_details.dob, user_details.designation, user_details.phone
   FROM users
   LEFT JOIN user_details ON users.id = user_details.id
@@ -128,3 +125,31 @@ const query = `
     });
   });
 };
+
+
+
+  exports.updateProfile = (req,res)=>{
+    const userId = req.user.id;
+    const {email,address,designation , dob ,phone} = req.body;
+
+    const query = `
+    INSERT INTO user_details (id , address,designation , dob , phone)
+    VALUES (? ,? ,?,?,?)
+    ON DUPLICATE KEY UPDATE 
+    address = VALUES(address),
+    designation = VALUES(designation),
+    dob = VALUES(dob),
+    phone = VALUES(phone)`;
+    
+
+    db.query(query,[userId , address , designation , dob , phone] ,(err,result)=>{
+      // console.log(result,"---result");
+      
+       if(err){
+        console.error('Update mei error aya query yah parametes check kro' , err);
+        return res.status(500).json({error:"Update failed"});
+       }
+
+       res.json({message:'Profile updated successfully'})
+    })
+  }

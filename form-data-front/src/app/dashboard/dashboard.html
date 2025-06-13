@@ -1,12 +1,109 @@
-<div class="dashboard-container">
-  <div class="dashboard-card" *ngIf="user; else loading">
-    <h2>Welcome to Your Dashboard</h2>
-    <p><strong>User ID:</strong> {{ user.id }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <button (click)="logout()">Logout</button>
+
+
+<div class="profile-container" *ngIf="user; else loading">
+
+  <!-- Normal Profile Card -->
+  <div class="profile-card" *ngIf="!isEditMode">
+    <div class="profile-header">
+      <img
+        src="https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff"
+        alt="User Avatar"
+        class="avatar"
+      />
+      <h2>{{ user.name }}</h2>
+      <p class="tagline">{{ user.designation }}</p>
+    </div>
+
+    <div class="profile-details">
+      <div class="detail">
+        <label>Email</label>
+        <p>{{ user.email }}</p>
+      </div>
+      <div class="detail">
+        <label>Phone</label>
+        <p>{{ user.phone }}</p>
+      </div>
+      <div class="detail">
+        <label>Address</label>
+        <p>{{ user.address }}</p>
+      </div>
+      <div class="detail">
+        <label>Date of Birth</label>
+        <p>{{ user.dob }}</p>
+      </div>
+    </div>
+
+    <button (click)="toggleEditMode()">
+      Edit Profile
+    </button>
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
   </div>
 
-  <ng-template #loading>
-    <p>Loading user information...</p>
-  </ng-template>
+  <!-- Edit Form Card Styled -->
+  <div class="profile-card" *ngIf="isEditMode && editForm">
+    <form [formGroup]="editForm" (ngSubmit)="onUpdate()">
+      <div class="profile-header">
+        <img
+          src="https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff"
+          alt="User Avatar"
+          class="avatar"
+        />
+        <h2>Edit Profile</h2>
+      </div>
+
+      <div class="profile-details">
+        <div class="detail">
+          <label>Email:</label>
+          <input type="email" formControlName="email" />
+        </div>
+        <div class="detail">
+          <label>Address:</label>
+          <input type="text" formControlName="address" />
+        </div>
+        <div class="detail">
+          <label>Designation:</label>
+          <input type="text" formControlName="designation" />
+        </div>
+        <div class="detail">
+          <label>Date of Birth:</label>
+          <input type="date" formControlName="dob" />
+        </div>
+        <div class="detail">
+          <label>Phone:</label>
+          <input type="text" formControlName="phone" />
+        </div>
+      </div>
+
+      <button type="submit">Save</button>
+      <button type="button" (click)="toggleEditMode()">Cancel</button>
+      <!-- Add this inside your <form> element -->
+<button type="button" (click)="updateViaSocket()" *ngIf="isEditMode">
+  Save via Socket
+</button>
+
+    </form>
+  </div>
 </div>
+
+<div class = "message-box">
+  <h3> Send a Message</h3>
+
+  <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+    <input type = "text" formControlName ="message" placeholder="Type krooo...">
+    <button type = "submit"> Send </button>
+  </form>
+
+  <div class = "message">
+    <h4>Message Received</h4>
+    <ul>
+      <li *ngFor="let msg of receivedMessage">{{msg}}</li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading-box">
+    <p>Loading profile...</p>
+  </div>
+</ng-template>
